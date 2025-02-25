@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  smokeping:
+    image: linuxserver/smokeping
+    container_name: smokeping
+    restart: always
+    network_mode: smokeping  # You can change to a specific network if needed
+    ports:
+      - "8080:80"  # Expose port 8080 to access the web UI
+    volumes:
+      - /opt/smokeping/data:/data  # Mount data directory to persist data
+      - /opt/smokeping/config:/config  # Mount configuration directory
+      - /usr/share/zoneinfo/Asia/Dhaka:/etc/localtime:ro  # Set time zone to Asia/Dhaka
+      - /etc/timezone:/etc/timezone:ro  # Sync time zone from host
+    environment:
+      - TZ=Asia/Dhaka  # Set the time zone environment variable
